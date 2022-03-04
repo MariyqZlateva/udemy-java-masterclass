@@ -62,8 +62,9 @@ public class MobilePhone {
         if (existingContact != null) {
             existingContact.setPhoneNumber(newPhoneNumber);
             System.out.println("The " + existingContact + " phone number was updated: " + newPhoneNumber);
+        } else {
+            System.out.println("The " + contactName + " is not found");
         }
-        System.out.println("The " + contactName + " is not found");
     }
 
     public void updateContactByPosition(int position, Contact contact) {
