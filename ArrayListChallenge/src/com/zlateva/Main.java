@@ -34,6 +34,7 @@ public class Main {
 
     public static void main(String[] args) {
         processContactList();
+
     }//end of main method
 
     private static void processContactList() {
@@ -123,7 +124,7 @@ public class Main {
         while (true) {
             try {
                 long number = scanner.nextLong();
-                validatePhoneNumber(number);
+                validatePhoneNumberStringImpl(number);
                 return number;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a number!");
@@ -160,12 +161,26 @@ public class Main {
     }
 
     private static void validatePhoneNumber(long phoneNumber) {
-        // todo create separate function that returns the count of digits in phoneNumber
-        // e.g. 1234 should return 4
+        if (!tenDigitsCounter(phoneNumber)) {
+            throw new RuntimeException("Write 10 digits");
+        }
+    }
+
+    private static void validatePhoneNumberStringImpl(long phoneNumber) {
         String phone = "" + phoneNumber;
         if (phone.length() != 10) {
             throw new RuntimeException("Phone number should be 10 digits long");
         }
+    }
+
+    private static boolean tenDigitsCounter(long phoneNumber) {
+        long counter = 0;
+        while (phoneNumber >= 1) {
+            long digit = phoneNumber % 10;
+            counter++;
+            phoneNumber /= 10;
+        }
+        return counter == 10;
     }
 
 }
