@@ -42,7 +42,7 @@ public class Main {
         int choice = 0;
         printInstructions();
         while (!quit) {
-            System.out.println("Enter your choice ");
+            System.out.print("Enter your choice ");
             choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -92,9 +92,9 @@ public class Main {
     }
 
     private static void addContact() {
-        System.out.println("Enter contact name: ");
+        System.out.print("Enter contact name: ");
         String name = getString();
-        System.out.println("Enter contact phoneNumber: ");
+        System.out.print("Enter contact phoneNumber: ");
         long phoneNumber = getLong();
         Contact contact = createContact(name, phoneNumber);
         mobilePhone.addNewContact(contact);
@@ -121,13 +121,13 @@ public class Main {
     }
 
     private static void removeContact() {
-        System.out.println("Current name: ");
+        System.out.print("Current name: ");
         String name = getString();
         mobilePhone.removeContact(name);
     }
 
     private static void searchForContact() {
-        System.out.println("Search name: ");
+        System.out.print("Search name: ");
         String name = getString();
         mobilePhone.searchContactByName(name);
     }
@@ -139,10 +139,10 @@ public class Main {
                 validatePhoneNumberStringImpl(number);
                 return number;
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a number!");
+                System.out.print("Please enter a number!");
                 scanner.nextLine();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.print(e.getMessage());
                 scanner.nextLine();
             }
         }
@@ -155,7 +155,7 @@ public class Main {
                 validateName(string);
                 return string;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.print(e.getMessage());
             }
         }
     }
