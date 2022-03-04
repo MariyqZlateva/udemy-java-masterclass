@@ -60,12 +60,15 @@ public class Main {
                     updateContact();
                     break;
                 case 4:
-                    removeContact();
+                    updateContactPhoneNumber();
                     break;
                 case 5:
-                    searchForContact();
+                    removeContact();
                     break;
                 case 6:
+                    searchForContact();
+                    break;
+                case 7:
                     quit = true;
                     break;
             }
@@ -77,10 +80,11 @@ public class Main {
         System.out.println("\t 0 - To print choice options.");
         System.out.println("\t 1 - To print the contact list.");
         System.out.println("\t 2 - To add an contact.");
-        System.out.println("\t 3 - To modify an existing contact.");
-        System.out.println("\t 4 - To remove an contact.");
-        System.out.println("\t 5 - To search an contact.");
-        System.out.println("\t 6 - To quit the application.");
+        System.out.println("\t 3 - To update an existing contact name.");
+        System.out.println("\t 4 - To update an existing contact phone number.");
+        System.out.println("\t 5 - To remove an contact.");
+        System.out.println("\t 6 - To search an contact.");
+        System.out.println("\t 7 - To quit the application.");
     }
 
     private static void printContacts() {
@@ -101,11 +105,19 @@ public class Main {
     }
 
     private static void updateContact() {
-        System.out.println("Current name: ");
+        System.out.print("Current name: ");
         String name = getString();
-        System.out.println("Enter new name: ");
+        System.out.print("Enter new name: ");
         String newName = getString();
         mobilePhone.updateContactName(name, newName);
+    }
+
+    private static void updateContactPhoneNumber() {
+        System.out.print("Contact name: ");
+        String name = getString();
+        System.out.print("Enter new phone number: ");
+        long phoneNumber = getLong();
+        mobilePhone.updateContactPhoneNumber(name,phoneNumber);
     }
 
     private static void removeContact() {
