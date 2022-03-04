@@ -42,37 +42,46 @@ public class Main {
         int choice = 0;
         printInstructions();
         while (!quit) {
-            System.out.print("Enter your choice ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                System.out.print("Enter your choice ");
+                choice = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (choice) {
-                case 0:
-                    printInstructions();
-                    break;
-                case 1:
-                    printContacts();
-                    break;
-                case 2:
-                    addContact();
-                    break;
-                case 3:
-                    updateContact();
-                    break;
-                case 4:
-                    updateContactPhoneNumber();
-                    break;
-                case 5:
-                    removeContact();
-                    break;
-                case 6:
-                    searchForContact();
-                    break;
-                case 7:
-                    quit = true;
-                    break;
+                switch (choice) {
+                    case 0:
+                        printInstructions();
+                        break;
+                    case 1:
+                        printContacts();
+                        break;
+                    case 2:
+                        addContact();
+                        break;
+                    case 3:
+                        updateContact();
+                        break;
+                    case 4:
+                        updateContactPhoneNumber();
+                        break;
+                    case 5:
+                        removeContact();
+                        break;
+                    case 6:
+                        searchForContact();
+                        break;
+                    case 7:
+                        quit = true;
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a number!");
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
+                scanner.nextLine();
             }
         }
+
     }
 
     private static void printInstructions() {
@@ -117,7 +126,7 @@ public class Main {
         String name = getString();
         System.out.print("Enter new phone number: ");
         long phoneNumber = getLong();
-        mobilePhone.updateContactPhoneNumber(name,phoneNumber);
+        mobilePhone.updateContactPhoneNumber(name, phoneNumber);
     }
 
     private static void removeContact() {
