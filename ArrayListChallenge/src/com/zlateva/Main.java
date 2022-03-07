@@ -15,21 +15,24 @@ import java.util.Scanner;
 // and search/find contact.
 // When adding or updating be sure to check if the contact already exists (use name)
 // Be sure not to expose the inner workings of the Arraylist to MobilePhone
-// e.g. no ints, no .get(i) etc
+// e.g. no ints, no .get(i) etc.
 // MobilePhone should do everything with Contact objects only.
 
 public class Main {
+
+
+    private static final String CONTACT_NOT_FOUND_PLACEHOLDER = "Contact with name \"%s\" not found";
 
     private static Scanner scanner = new Scanner(System.in);
     private static List<Contact> contacts = new ArrayList<>();
     private static MobilePhone mobilePhone = new MobilePhone(contacts);
 
     static {
-        contacts.add(new Contact("Mimi", 1234567890L));
-        contacts.add(new Contact("Tedi", 1234567890L));
-        contacts.add(new Contact("Peti", 1234567890L));
-        contacts.add(new Contact("Gabi", 1234567890L));
-        contacts.add(new Contact("Mishi", 1234567890L));
+        contacts.add(new Contact("Mimi", 1234567891L));
+        contacts.add(new Contact("Tedi", 1234567892L));
+        contacts.add(new Contact("Peti", 1234567893L));
+        contacts.add(new Contact("Gabi", 1234567894L));
+        contacts.add(new Contact("Mishi", 1234567895L));
     }
 
     public static void main(String[] args) {
@@ -38,48 +41,43 @@ public class Main {
     }//end of main method
 
     private static void processContactList() {
+        String choiceMassage = "Enter your choice between 0 and 7: ";
         boolean quit = false;
         int choice = 0;
         printInstructions();
         while (!quit) {
-            try {
-                System.out.print("Enter your choice ");
-                choice = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (choice) {
-                    case 0:
-                        printInstructions();
-                        break;
-                    case 1:
-                        printContacts();
-                        break;
-                    case 2:
-                        addContact();
-                        break;
-                    case 3:
-                        updateContact();
-                        break;
-                    case 4:
-                        updateContactPhoneNumber();
-                        break;
-                    case 5:
-                        removeContact();
-                        break;
-                    case 6:
-                        searchForContact();
-                        break;
-                    case 7:
-                        quit = true;
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.print("Please enter a number!");
-                scanner.nextLine();
-            } catch (Exception e) {
-                System.out.print(e.getMessage());
-                scanner.nextLine();
+            System.out.print(choiceMassage);
+            choice = getInt();
+            switch (choice) {
+                case 0:
+                    printInstructions();
+                    break;
+                case 1:
+                    printContacts();
+                    break;
+                case 2:
+                    addContact();
+                    break;
+                case 3:
+                    updateContact();
+                    break;
+                case 4:
+                    updateContactPhoneNumber();
+                    break;
+                case 5:
+                    removeContact();
+                    break;
+                case 6:
+                    searchForContact();
+                    break;
+                case 7:
+                    quit = true;
+                    break;
+                default:
+                    System.out.print(choiceMassage);
+                    break;
             }
+
         }
 
     }
@@ -103,6 +101,10 @@ public class Main {
     private static void addContact() {
         System.out.print("Enter contact name: ");
         String name = getString();
+        if (mobilePhone.isContactPresentInList(name)) {
+            System.out.println("Contact with name " + name + " already exists!");
+            return;
+        }
         System.out.print("Enter contact phoneNumber: ");
         long phoneNumber = getLong();
         Contact contact = createContact(name, phoneNumber);
@@ -116,14 +118,27 @@ public class Main {
     private static void updateContact() {
         System.out.print("Current name: ");
         String name = getString();
+        if (!mobilePhone.isContactPresentInList(name)) {
+            String massage = String.format(CONTACT_NOT_FOUND_PLACEHOLDER, name);
+            System.out.println(massage);
+            return;
+        }
         System.out.print("Enter new name: ");
         String newName = getString();
+        while (mobilePhone.isContactPresentInList(newName)) {
+            System.out.println("Contact with name '" + newName + "' already exist! Enter new name: ");
+            newName = getString();
+        }
         mobilePhone.updateContactName(name, newName);
     }
 
     private static void updateContactPhoneNumber() {
         System.out.print("Contact name: ");
         String name = getString();
+        if (!mobilePhone.isContactPresentInList(name)) {
+            System.out.println(String.format(CONTACT_NOT_FOUND_PLACEHOLDER, name));
+            return;
+        }
         System.out.print("Enter new phone number: ");
         long phoneNumber = getLong();
         mobilePhone.updateContactPhoneNumber(name, phoneNumber);
@@ -132,6 +147,10 @@ public class Main {
     private static void removeContact() {
         System.out.print("Current name: ");
         String name = getString();
+        if (!mobilePhone.isContactPresentInList(name)) {
+            System.out.println(String.format(CONTACT_NOT_FOUND_PLACEHOLDER, name));
+            return;
+        }
         mobilePhone.removeContact(name);
     }
 
@@ -141,11 +160,25 @@ public class Main {
         mobilePhone.searchContactByName(name);
     }
 
+    private static int getInt() {
+        while (true) {
+            try {
+                int number = scanner.nextInt();
+                scanner.nextLine();
+                return number;
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a number!");
+                scanner.nextLine();
+            }
+        }
+    }
+
     private static long getLong() {
         while (true) {
             try {
                 long number = scanner.nextLong();
-                validatePhoneNumberStringImpl(number);
+                validatePhoneNumber(number);
+                scanner.nextLine();
                 return number;
             } catch (InputMismatchException e) {
                 System.out.print("Please enter a number!");
@@ -183,14 +216,14 @@ public class Main {
 
     private static void validatePhoneNumber(long phoneNumber) {
         if (!tenDigitsCounter(phoneNumber)) {
-            throw new RuntimeException("Write 10 digits");
+            throw new RuntimeException("Phone number should be 10 digits long: ");
         }
     }
 
     private static void validatePhoneNumberStringImpl(long phoneNumber) {
         String phone = "" + phoneNumber;
         if (phone.length() != 10) {
-            throw new RuntimeException("Phone number should be 10 digits long");
+            throw new RuntimeException("Phone number should be 10 digits long: ");
         }
     }
 

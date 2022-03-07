@@ -34,10 +34,12 @@ public class MobilePhone {
     }
 
     public void addNewContact(Contact contact) {
-        if (!isContactPresentInList(contact)) {
-            contactList.add(contact);
-            System.out.println("Added " + contact);
+        if (isContactPresentInList(contact)) {
+            System.out.println("Contact with name " + contact.getName() + " already exists!");
+            return;
         }
+        contactList.add(contact);
+        System.out.println("Added " + contact);
     }
 
     public void updateContactName(String contactName, String updatedName) {
@@ -53,24 +55,21 @@ public class MobilePhone {
             System.out.println("This name " + updatedName + " already exist");
             return;
         }
+        String oldName = existingContact.getName();
         existingContact.setName(updatedName);
-        System.out.println(existingContact + " updated.");
+        System.out.println("Contact with name "+ oldName + " was updated to: "+ existingContact );
     }
 
     public void updateContactPhoneNumber(String contactName, long newPhoneNumber) {
-        Contact existingContact = getContactByName(contactName);
-        if (existingContact != null) {
-            existingContact.setPhoneNumber(newPhoneNumber);
-            System.out.println("The " + existingContact + " phone number was updated: " + newPhoneNumber);
+        Contact contact = getContactByName(contactName);
+        if (contact != null) {
+            long oldNumber = contact.getPhoneNumber();
+            contact.setPhoneNumber(newPhoneNumber);
+            String massage = "Contact with name " + contact.getName() + " phone number was updated from: " + oldNumber + " to: " + contact.getPhoneNumber();
+            System.out.println(massage);
         } else {
-            System.out.println("The " + contactName + " is not found");
+            System.out.println("Contact with name " + contactName + " not found");
         }
-    }
-
-    public void updateContactByPosition(int position, Contact contact) {
-        Contact contactPosition = contactList.get(position);
-        this.contactList.set(position, contact);
-        System.out.println("Contact " + (position + 1) + " was modified.");
     }
 
     public void removeContact(String name) {
@@ -85,10 +84,18 @@ public class MobilePhone {
         if (contact != null) {
             System.out.println("Found " + contact);
         } else {
-            System.out.println("Contact with " + name + " not found");
+            System.out.println("Contact with name " + name + " not found");
         }
     }
 
+    public boolean isContactPresentInList(String name) {
+        for (Contact current : contactList) {
+            if (current.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // == private methods ==
     private void removeContact(Contact contact) {
@@ -108,15 +115,6 @@ public class MobilePhone {
     private boolean isContactPresentInList(Contact contact) {
         for (Contact current : contactList) {
             if (current.equals(contact)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isContactPresentInList(String name) {
-        for (Contact current : contactList) {
-            if (current.getName().equals(name)) {
                 return true;
             }
         }
