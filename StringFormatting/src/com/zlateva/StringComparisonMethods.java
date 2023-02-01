@@ -1,0 +1,32 @@
+package com.zlateva;
+
+public class StringComparisonMethods {
+
+    public static void main(String[] args) {
+
+        //String Comparison Methods - contentEquals, equals, equalsIgnoreCase, contains, endsWith/startsWith, regionMatches
+
+        String helloWorld = "Hello World";
+        String helloWorldLower = helloWorld.toLowerCase();
+
+        if (helloWorld.equals(helloWorldLower)){
+            System.out.println("Values match exactly");
+        }
+        if (helloWorld.equalsIgnoreCase(helloWorldLower)){
+            System.out.println("Values match ignoring case");
+        }
+
+        if (helloWorld.startsWith("Hello")){
+            System.out.println("String starts with Hello");
+        }
+        if (helloWorld.endsWith("World")){
+            System.out.println("String ends with World");
+        }
+        if (helloWorld.contains("Hello")){
+            System.out.println("String contains Hello");
+        }
+        if (helloWorld.contentEquals("Hello World")){
+            System.out.println("Values match exactly");
+        }
+    }
+}
