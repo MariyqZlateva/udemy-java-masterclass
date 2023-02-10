@@ -14,6 +14,7 @@ public class Main {
 
         System.out.println(); reverseArray(returnedArray);
         System.out.println(Arrays.toString(returnedArray) );
+
     }
 
     private static int[] readIntegers() {
