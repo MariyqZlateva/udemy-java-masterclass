@@ -70,7 +70,7 @@ public class Bank {
             System.out.println(customer);
             if (withTransactions) {
                 ArrayList<Double> transactionsList = customer.getTransactionList();
-                for (Double transactions : transactionsList) {
+                for (double transactions : transactionsList) {
                     System.out.println("\t " + transactions);
                 }
             }
