@@ -9,31 +9,9 @@ public class Shirt extends ProductForSale {
 
     @Override
     public void showDetails() {
-        System.out.println(getType() + " " + getDescription() + " " + getPrice() + " $");
+        System.out.println(type);
+        System.out.printf("The price is $6.2f %n", price);
+        System.out.println(description);
     }
 
-    @Override
-    public String getType() {
-        return super.getType();
-    }
-
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public String getDescription() {
-        return super.getDescription();
-    }
-
-    @Override
-    public double getSalesPrice(double quantity) {
-        return super.getSalesPrice(quantity);
-    }
-
-    @Override
-    public void printItemizedLineItem(double quantity) {
-        super.printItemizedLineItem(quantity);
-    }
 }

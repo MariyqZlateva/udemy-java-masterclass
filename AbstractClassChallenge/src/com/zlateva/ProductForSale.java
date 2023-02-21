@@ -1,9 +1,9 @@
 package com.zlateva;
 
 public abstract class ProductForSale {
-    private String type;
-    private double price;
-    private String description;
+    protected String type;
+    protected double price;
+    protected String description;
 
     public ProductForSale(String type, double price, String description) {
         this.type = type;
@@ -11,24 +11,13 @@ public abstract class ProductForSale {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getSalesPrice(double quantity) {
+    public double getSalesPrice(int quantity) {
         return quantity * price;
     }
 
-    public void printItemizedLineItem(double quantity) {
-        System.out.println(type + " quantity for " + getSalesPrice(quantity));
+    public void printItemizedLineItem(int quantity) {
+        System.out.printf("2%d quantity at $%8.2f each, %-15s %-35s %n",
+                quantity, price, type, description);
     }
 
     public abstract void showDetails();
