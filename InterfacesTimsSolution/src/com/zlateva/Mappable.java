@@ -2,6 +2,8 @@ package com.zlateva;
 
 enum Geometry {LINE, PONT, POLYGON}
 
+enum Color {RED, GREEN, BLACK, PINK, BLUE, ORANGE}
+
 enum PointMarker {CIRCLE, PUSH_PIN, STAR, SQUARE, TRIANGLE}
 
 enum LineMarker {DASHED, DOTTED, SOLID}

@@ -1,8 +1,8 @@
 package com.zlateva;
 
-enum UsageType {ENTERTAINMENT, GOVERNMENT, RESIDENTIAL, SPORTS}
+import java.awt.*;
 
-enum Color {RED, GREEN, BLACK, PINK, BLUE, ORANGE}
+enum UsageType {ENTERTAINMENT, GOVERNMENT, RESIDENTIAL, SPORTS}
 
 public class Building implements Mappable {
 
