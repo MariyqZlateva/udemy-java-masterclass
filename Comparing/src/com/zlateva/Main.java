@@ -48,22 +48,25 @@ public class Main {
         System.out.println(Arrays.toString(students));
     }
 }
-class StudentGPAComparator implements Comparator<Student>{
+
+class StudentGPAComparator implements Comparator<Student> {
     @Override
-    public int compare(Student o1, Student o2){
+    public int compare(Student o1, Student o2) {
         return (o1.gpa + o1.name).compareTo(o2.gpa + o2.name);
     }
 }
+
 class Student implements Comparable<Student> {
     private static int LAST_ID = 1000;
     private static Random random = new Random();
     String name;
     private int id;
     protected double gpa;
+
     public Student(String name) {
         this.name = name;
         id = LAST_ID++;
-        gpa = random.nextDouble();
+        gpa = randomDouble(1.0, 4.0);
     }
 
     @Override
@@ -73,9 +76,12 @@ class Student implements Comparable<Student> {
 
     @Override
     public int compareTo(Student o) {
-       return Integer.valueOf(id).compareTo(Integer.valueOf(o.id));
+        return Integer.valueOf(id).compareTo(Integer.valueOf(o.id));
     }
 
+    public static double randomDouble(double min, double max) {
+        return min + (max - min) * random.nextDouble();
+    }
 //    @Override
 //    public int compareTo(Object o) {
 //        Student other = (Student) o;
