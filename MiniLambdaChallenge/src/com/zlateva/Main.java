@@ -40,7 +40,7 @@ public class Main {
         };
         printWordsConcise.accept("Let's split this in to an array");
 
-        Function<String, String> everySecondChar = source-> {
+        Function<String, String> everySecondChar = source -> {
             StringBuilder returnVal = new StringBuilder();
             for (int i = 0; i < source.length(); i++) {
                 if (i % 2 == 1) {
@@ -61,8 +61,8 @@ public class Main {
             }
             return returnVal.toString();
         };
-
-
+        System.out.println("++++++++++++++++++++++");
+        System.out.println(everySecondCharacter(everySecondChar, "123456789000"));
     }
 
     public static String everySecondChar(String source) {
@@ -75,5 +75,8 @@ public class Main {
         return returnVal.toString();
     }
 
-
+    public static String everySecondCharacter(Function<String, String> secondChar,
+                                             String source) {
+        return secondChar.apply(source);
+    }
 }
