@@ -3,6 +3,7 @@ package com.zlateva;
 import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class Main {
@@ -63,6 +64,13 @@ public class Main {
         };
         System.out.println("++++++++++++++++++++++");
         System.out.println(everySecondCharacter(everySecondChar, "123456789000"));
+
+        Supplier<String> iLoveJava = () -> "I love Java!";
+        Supplier<String> iLoveJava2 = () -> {
+            return "I love Java!";
+        };
+        String supplierResult = iLoveJava.get();
+        System.out.println(supplierResult);
     }
 
     public static String everySecondChar(String source) {
@@ -76,7 +84,7 @@ public class Main {
     }
 
     public static String everySecondCharacter(Function<String, String> secondChar,
-                                             String source) {
+                                              String source) {
         return secondChar.apply(source);
     }
 }
