@@ -37,8 +37,12 @@ public class Main {
         newList.removeIf(s -> {
             String first = s.substring(0, s.indexOf(" "));
             String last = s.substring(s.lastIndexOf(" ") + 1);
+            if (first.equals(last)){
+                System.out.println("Removed = "+ first);
+            }
             return first.equals(last);
         });
+
         System.out.println("--> Remove names where first = last");
         newList.forEach(s -> System.out.println(s));
 
