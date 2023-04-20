@@ -25,16 +25,16 @@ public class Series {
     // Create a new project and add your Series library, then test the
     // three methods in the main() method of your new project.
 
-    public static int nSum(int n) {
-        int sum = 0;
-        for (int i = 0; i <= n; i++) {
-            sum += i;
-            if (i != n) {
-                System.out.print(sum + ", ");
-            }
-        }
-        return sum;
-    }
+//    public static int nSum(int n) {
+//        int sum = 0;
+//        for (int i = 0; i <= n; i++) {
+//            sum += i;
+//            if (i != n) {
+//                System.out.print(sum + ", ");
+//            }
+//        }
+//        return sum;
+//    }
 
     public static int sumOfNNumbers(int n) {
         return n * (n + 1) / 2;
@@ -46,9 +46,6 @@ public class Series {
         int factorial = 1;
         for (int i = 1; i <= n; i++) {
             factorial *= i;
-            if (i != n) {
-                System.out.print(factorial + ", ");
-            }
         }
         return factorial;
     }
@@ -56,22 +53,7 @@ public class Series {
         if (n == 1 || n == 2) {
             return 1;
         }
-        System.out.println("N = " + n);
         return fib(n - 1) + fib(n - 2);
-    }
-
-    public static int fibonacci(int n) {
-        int first = 0;
-        int next = 1;
-        int fib = 0;
-        System.out.print(first + " " + next);
-        for (int i = 2; i < n; ++i) {
-            fib = (first) + (next);
-            System.out.print(" " + fib);
-            first = next;
-            next = fib;
-        }
-        return fib;
     }
 
 }
