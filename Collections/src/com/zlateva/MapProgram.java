@@ -27,7 +27,6 @@ public class MapProgram {
         }
         System.out.println("======================================================");
 
-        //languages.remove("Lisp");
 
         if (languages.remove("Algol", "an algorithmic language")) {
             System.out.println("Algol removed");
@@ -42,7 +41,7 @@ public class MapProgram {
             System.out.println("Lisp was not replaced");
         }
 
-//        System.out.println(languages.replace("Scala", "this will not be added"));
+
         for (String key : languages.keySet()) {
             System.out.println(key + " : " + languages.get(key));
         }
