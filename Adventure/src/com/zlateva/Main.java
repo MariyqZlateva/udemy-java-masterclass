@@ -39,14 +39,20 @@ public class Main {
         locations.get(5).addExit("S", 1);
         locations.get(5).addExit("W", 2);
 
+        Map<String, String> vocabulary = new HashMap<>();
+        vocabulary.put("QUIT", "Q");
+        vocabulary.put("NORTH", "N");
+        vocabulary.put("SOUTH", "S");
+        vocabulary.put("WEST", "W");
+        vocabulary.put("EAST", "E");
+
+
         int loc = 1;
         while (true) {
-
             System.out.println(locations.get(loc).getDescription());
             if (loc == 0) {
                 break;
             }
-
             Map<String, Integer> exits = locations.get(loc).getExits();
             System.out.print("Available exits ");
             for (String exit : exits.keySet()) {
@@ -55,10 +61,25 @@ public class Main {
             System.out.println();
 
             String direction = scanner.nextLine().toUpperCase();
-            if (exits.containsKey(direction)){
-                loc= exits.get(direction);
-            }else {
-                System.out.println("You cannot go in that direction");
+            if (direction.length()>1){
+               String [] words = direction.split(" ");
+               for (String word : words){
+                   if (vocabulary.containsKey(word)){
+                       direction = vocabulary.get(word);
+                       break;
+                   }
+               }
+            }
+            if (exits.containsKey(direction)) {
+                loc = exits.get(direction);
+            } else {
+                System.out.println("You cannot go in that substring direction");
+            }
+
+
+            String testingString = "I am Mari";
+            if (testingString.matches("M")) {
+                System.out.println("The string contains M ");
             }
         }
     }
