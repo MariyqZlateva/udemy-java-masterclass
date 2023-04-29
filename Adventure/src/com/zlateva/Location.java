@@ -24,6 +24,6 @@ public class Location {
     }
 
     public Map<String, Integer> getExits() {
-        return new HashMap<String, Integer>(exits);
+        return new HashMap<>(exits);
     }
 }
