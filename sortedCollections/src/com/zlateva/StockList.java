@@ -2,6 +2,7 @@ package com.zlateva;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class StockList {
@@ -14,7 +15,7 @@ public class StockList {
     public int addStock(StockItem item) {
         if (item != null) {
             //check if already have quantities of this item
-           StockItem inStock = list.getOrDefault(item.getName(), item);
+            StockItem inStock = list.getOrDefault(item.getName(), item);
             //StockItem inStock = list.get(item.getName());
             //If there are already stock on this item, adjust the quantity
             if (inStock != item) {
@@ -45,6 +46,14 @@ public class StockList {
         return Collections.unmodifiableMap(list);
     }
 
+    public Map<String, Double> PriceList() {
+        Map<String, Double> prices = new LinkedHashMap<>();
+        for (Map.Entry<String, StockItem> item : list.entrySet()) {
+            prices.put(item.getKey(), item.getValue().getPrice());
+        }
+        return Collections.unmodifiableMap(prices);
+    }
+
     @Override
     public String toString() {
         String s = "\nStock List\n";
@@ -55,9 +64,9 @@ public class StockList {
             double itemValue = stockItem.getPrice() * stockItem.quantityInStock();
             s = s + stockItem + " There are " + stockItem.quantityInStock() +
                     " in stock. Value of items: ";
-            s = s + String.format("%.2f",itemValue)  + "\n";
+            s = s + String.format("%.2f", itemValue) + "\n";
             totalCost += itemValue;
         }
-        return s + " Total stock value " +  String.format("%.2f",totalCost) ;
+        return s + " Total stock value " + String.format("%.2f", totalCost);
     }
 }
