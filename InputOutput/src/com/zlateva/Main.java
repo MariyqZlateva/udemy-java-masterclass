@@ -6,10 +6,9 @@ import java.util.Scanner;
 
 public class Main {
     private static Locations locations = new Locations();
-    private static Map<String, String> vocabulary = new HashMap<>();
 
     public static void main(String[] args) {
-
+        Map<String, String> vocabulary = new HashMap<>();
         Scanner scanner = new Scanner(System.in);
 
         vocabulary.put("QUIT", "Q");
@@ -18,12 +17,11 @@ public class Main {
         vocabulary.put("WEST", "W");
         vocabulary.put("EAST", "E");
 
-        int loc = 64;
 
- //       int loc = 1;
+        int loc = 1;
         while (true) {
             System.out.println(locations.get(loc).getDescription());
- //           tempExit.remove("S");
+            //           tempExit.remove("S");
             if (loc == 0) {
                 break;
             }
