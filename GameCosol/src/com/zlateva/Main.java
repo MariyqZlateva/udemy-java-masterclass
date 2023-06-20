@@ -1,13 +1,34 @@
 package com.zlateva;
 
 import com.zlateva.game.GameConsole;
-import com.zlateva.game.ShooterGame;
+import com.zlateva.pirate.PirateGame;
 
 public class Main {
     public static void main(String[] args) {
-        var console = new GameConsole<>(new ShooterGame("The Shootout Game"));
+//        var console = new GameConsole<>(new ShooterGame("The Shootout Game"));
+//
+//        int playerIndex = console.addPlayer();
+//        console.playGame(playerIndex);
+//
+//        Weapon weapon = Weapon.getWeaponByChar('P');
+//        System.out.println("weapon = " + weapon + ", hitPoints = "+
+//                weapon.getHitPoints() + ", minLevel = "+ weapon.getMinLevel());
+//
+//        var list = Weapon.getWeaponByLevel(1);
+//        list.forEach(System.out::println);
+//
+//        Pirate pirate = new Pirate("Pirate");
+//        System.out.println(pirate);
+//
+//        PirateGame.getTowns(0).forEach(t-> System.out.println(t.information()));
+//        System.out.println("-----------------------------------------");
+//        PirateGame.getTowns(1).forEach(t-> System.out.println(t.information()));
 
-        int playerIndex = console.addPlayer();
-        console.playGame(playerIndex);
+
+        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
+        int playIndex= console.addPlayer();
+        console.playGame(playIndex);
     }
+
+
 }

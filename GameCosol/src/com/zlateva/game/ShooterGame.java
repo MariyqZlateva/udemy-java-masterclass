@@ -18,9 +18,9 @@ public class ShooterGame extends Game<Shooter> {
 
         var map = new LinkedHashMap<>(Map.of(
                 'F',
-                new GameAction('F', "Fined Prize", this::findPrize),
+                new GameAction('F', "Fined Prize ", this::findPrize),
                 'S',
-                new GameAction('S', "Use your gun", this::useWeapon)
+                new GameAction('S', "Use your gun ", this::useWeapon)
         ));
         map.putAll(getStandardAction());
         return map;
