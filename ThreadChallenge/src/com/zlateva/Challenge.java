@@ -1,9 +1,6 @@
 package com.zlateva;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-public class ChallengeNine {
+public class Challenge {
     public static void main(String[] args) {
         final NewTutor1 tutor = new NewTutor1();
         final NewStudent1 student = new NewStudent1(tutor);
@@ -29,32 +26,27 @@ public class ChallengeNine {
     }
 }
 
-class NewTutor {
+class NewTutor1 {
     private NewStudent1 student;
-    private Lock lock = new ReentrantLock();
+
 
     public void setStudent(NewStudent1 student) {
         this.student = student;
-        lock = new ReentrantLock();
     }
 
-    public void studyTime() {
+    public synchronized void studyTime() {
         System.out.println("Tutor has arrived");
-        if (lock.tryLock()) {
-            try {
-//                try {
-//                    // wait for student to arrive
-//                    this.wait();
-//
-//                } catch (InterruptedException e) {
+        try {
+            // wait for student to arrive
+            this.wait();
 
-//                }
-                student.startStudy();
-                System.out.println("Tutor is studying with student");
-            } finally {
-                lock.unlock();
-            }
+        } catch (InterruptedException e) {
+
         }
+        student.startStudy();
+        System.out.println("Tutor is studying with student");
+
+
     }
 
     public void getProgressReport() {
@@ -63,19 +55,16 @@ class NewTutor {
     }
 }
 
-class NewStudent {
+class NewStudent1 {
 
     private NewTutor1 tutor;
-
-    private Lock lock = new ReentrantLock();
-    NewStudent(NewTutor1 tutor) {
+    NewStudent1(NewTutor1 tutor) {
         this.tutor = tutor;
-        lock = new ReentrantLock();
     }
 
     public synchronized void startStudy() {
         // study
-            System.out.println("Student is studying");
+        System.out.println("Student is studying");
     }
 
     public void handInAssignment() {
@@ -89,3 +78,5 @@ class NewStudent {
         }
     }
 }
+
+
