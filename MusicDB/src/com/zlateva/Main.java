@@ -5,7 +5,6 @@ import com.zlateva.model.Datasource;
 import com.zlateva.model.SongArtist;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,22 +50,25 @@ public class Main {
 
         datasource.createViewForSongArtists();
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a song title: ");
-        String title = scanner.nextLine();
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter a song title: ");
+//        String title = scanner.nextLine();
 
-        //Go Your Own Way" ot 1=1 or" sql injection
-        songArtists = datasource.querySongInfoView(title);
-        if (songArtists.isEmpty()) {
-            System.out.println("Couldn't find the artist for the song");
-            return;
-        }
+//        //Go Your Own Way" ot 1=1 or" sql injection
+//        songArtists = datasource.querySongInfoView(title);
+//        if (songArtists.isEmpty()) {
+//            System.out.println("Couldn't find the artist for the song");
+//            return;
+//        }
+//
+//        for (SongArtist artist : songArtists) {
+//            System.out.println("FROM VIEW - Artist name = " + artist.getArtistName() +
+//                    " Album name = " + artist.getAlbumName() +
+//                    " Track number = " + artist.getTrack());
+//        }
 
-        for (SongArtist artist : songArtists) {
-            System.out.println("FROM VIEW - Artist name = " + artist.getArtistName() +
-                    " Album name = " + artist.getAlbumName() +
-                    " Track number = " + artist.getTrack());
-        }
+  //      datasource.insertSong("Touch of Grey", "Greatful Dead", "In The Dark",1 );
+        datasource.insertSong("Happy Me", "Hello", "90-ties Greatest Hits",5 );
 
         datasource.close();
     }
