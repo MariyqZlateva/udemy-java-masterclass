@@ -1,53 +1,42 @@
 package com.zlateva;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         try {
- //           URI uri = new URI("http://username:password@myserver.com:5000/catalogue/phones?os=android#samsung");
-            URI baseUri = new URI("http://username:password@mynewserver.com:5000");
-            URI uri1 = new URI("/catalogue/phones?os=android#samsung"); // relative path
-            URI uri2 = new URI("/catalogue/tvs?manufacturer=samsung"); // relative path
-            URI uri3 = new URI("/stores/locations?zip=1234"); // relative path
 
-            URI resolveUri1 = baseUri.resolve(uri1);
-            URI resolveUri2 = baseUri.resolve(uri2);
-            URI resolveUri3 = baseUri.resolve(uri3);
+            URL url = new URL("http://example.org");
+            URLConnection urlConnection = url.openConnection();
 
-            URL url1 = resolveUri1.toURL();
-            System.out.println("URL1 = " + url1);
+            urlConnection.setDoOutput(true);
+            urlConnection.connect();
 
-            URL url2 = resolveUri2.toURL();
-            System.out.println("URL2 = " + url2);
+            BufferedReader inputStream = new BufferedReader(
+                    new InputStreamReader(urlConnection.getInputStream()));
 
-            URL url3 = resolveUri3.toURL();
-            System.out.println("URL3 = " + url3);
-
-            URI relativazedURI = baseUri.relativize(resolveUri2);
-            System.out.println("Relative URI = "+ relativazedURI);
-
-
-
-            //            URI uri = new URI("hello");
-
-//            System.out.println("Scheme = "+ uri.getScheme());
-//            System.out.println("Scheme-specific part = "+ uri.getSchemeSpecificPart());
-//            System.out.println("Authority = "+ uri.getAuthority());
-//            System.out.println("User info = "+ uri.getUserInfo());
-//            System.out.println("Host = "+ uri.getHost());
-//            System.out.println("Port = "+ uri.getPort());
-//            System.out.println("Pat = "+ uri.getPath());
-//            System.out.println("Query = "+ uri.getQuery());
-//            System.out.println("Fragment = "+ uri.getFragment());
-
-        } catch (URISyntaxException e) {
-            System.out.println("URI Bad Syntax: " + e.getMessage());
+            Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
+            for (Map.Entry<String, List<String>> entry : headerFields.entrySet()) {
+                String key = entry.getKey();
+                List<String> value = entry.getValue();
+                System.out.println("---------key = "+ key);
+                for (String string : value) {
+                    System.out.println("value = " + value);
+                }
+            }
         } catch (MalformedURLException e) {
-            System.out.println("URL Malformed: " + e.getMessage());
+            System.out.println("Malformed URL: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IOException: " + e.getMessage());
         }
+
     }
+
 }
